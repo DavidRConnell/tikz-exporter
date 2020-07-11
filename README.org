@@ -1,0 +1,25 @@
+#+TITLE: Tikz exporter
+
+A series of exporters for converting tikz files to PDF, PNG, and SVG figures.
+General dependencies: LaTeX, the standalone LaTeX class, and bash.
+For conversion to PNG files also requires ~pdftoppm~.
+And for SVG conversion requires ~pdf2svg~.
+
+The PDF exporter writes a standalone tex file that ~\input~ the tikz file.
+Then compiles the resulting file with ~pdflatex~.
+The tikz file is expected to be wrap in the ~\tikzpicture~ environment.
+
+For conversion to SVG and PNG, ~tikz2pdf~ is run and the output PDF is converted to SVG or PNG respectively.
+As such they will also generate PDFs.
+
+* Use
+Clone this repository locally (and add to your path or link to somewhere on your path).
+Then run at the command line:
+
+#+BEGIN_SRC bash :export code :eval no
+tikz2pdf myfigure.tikz
+#+END_SRC
+
+replacing tikz2pdf with tikz2png or tikz2svg as needed.
+* Related
+[[https://github.com/reitzig/scripts/blob/master/tikz2png][scripts/tikz2png at master · reitzig/scripts · GitHub]]
