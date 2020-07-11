@@ -20,6 +20,6 @@ Then run at the command line:
 tikz2pdf myfigure.tikz
 #+END_SRC
 
-replacing tikz2pdf with tikz2png or tikz2svg as needed.
+replacing ~tikz2pdf~ with ~tikz2png~ or ~tikz2svg~ as needed.
 * Related
 [[https://github.com/reitzig/scripts/blob/master/tikz2png][scripts/tikz2png at master · reitzig/scripts · GitHub]]
