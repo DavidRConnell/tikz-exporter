@@ -1,0 +1,18 @@
+#!/bin/bash
+
+png_density="1200";
+png_size="600";
+
+if [ ${#} == 0 ]; then
+    cat <<EOF
+No file given to export.
+        Usage: $(basename $0) figure.tikz
+
+EOF
+    exit 1
+fi
+
+tikz2pdf "$1"
+base="${1%\.*}"
+pdftoppm -png -r $png_density -scale-to $png_size "$base".pdf "$base" \
+  && mv "$base"-1.png "$base".png

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ${#} == 0 ]; then
+    cat <<EOF
+No file given to export.
+        Usage: $(basename $0) figure.tikz
+
+EOF
+    exit 1
+fi
+
+tikz2pdf "$1"
+base="${1%\.*}"
+pdf2svg "$base".pdf "$base".svg

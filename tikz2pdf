@@ -1,0 +1,36 @@
+#!/bin/bash
+
+if [ ${#} == 0 ]; then
+    cat <<EOF
+No file given to export.
+        Usage: $(basename "$0") <file.tikz>
+
+EOF
+    exit 1
+fi
+
+if ! [ -f $1 ]; then
+    echo "$1 does not exist."
+    exit 2
+fi
+
+tmp="/tmp/tikz2pdf-$(date "+%Y%m%d%H%M%S")";
+file="$1"
+base=$(basename "${file%\.*}")
+tmpbase="$tmp"/"$base"
+texfile="$tmpbase".tex
+
+[ -d "$tmp" ] || mkdir "$tmp"
+
+cat <<EOF > "$texfile"
+\documentclass[tikz]{standalone}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\begin{document}
+\input{$file}
+\end{document}
+EOF
+
+pdflatex -interaction=nonstopmode -output-directory="$tmp" "$texfile" > "$tmp"/tikz2pdf.log \
+    && mv "$tmpbase".pdf "${file%\.*}".pdf
