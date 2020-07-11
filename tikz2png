@@ -6,7 +6,7 @@ png_size="600";
 if [ ${#} == 0 ]; then
     cat <<EOF
 No file given to export.
-        Usage: $(basename $0) figure.tikz
+        Usage: $(basename "$0") <file.tikz>
 
 EOF
     exit 1
