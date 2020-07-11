@@ -12,7 +12,7 @@ fi
 tmp="/tmp/tikz2pdf-$(date "+%Y%m%d%H%M%S")";
 [ -d "$tmp" ] || mkdir "$tmp"
 
-for file in $*; do
+for file in "$@"; do
     if ! [ -f "$file" ]; then
         echo "$file does not exist; skipping..."
         continue

@@ -12,7 +12,7 @@ EOF
     exit 1
 fi
 
-for file in $*; do
+for file in "$@"; do
   base="${file%\.*}"
   tikz2pdf "$file" \
     && pdftoppm -png -r $png_density -scale-to $png_size "$base".pdf "$base" \
