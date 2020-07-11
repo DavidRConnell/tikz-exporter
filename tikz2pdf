@@ -9,20 +9,20 @@ EOF
     exit 1
 fi
 
-if ! [ -f $1 ]; then
-    echo "$1 does not exist."
-    exit 2
-fi
-
 tmp="/tmp/tikz2pdf-$(date "+%Y%m%d%H%M%S")";
-file="$1"
-base=$(basename "${file%\.*}")
-tmpbase="$tmp"/"$base"
-texfile="$tmpbase".tex
-
 [ -d "$tmp" ] || mkdir "$tmp"
 
-cat <<EOF > "$texfile"
+for file in $*; do
+    if ! [ -f "$file" ]; then
+        echo "$file does not exist; skipping..."
+        continue
+    fi
+
+    base=$(basename "${file%\.*}")
+    tmpbase="$tmp"/"$base"
+    texfile="$tmpbase".tex
+
+    cat <<EOF > "$texfile"
 \documentclass[tikz]{standalone}
 \usepackage{graphicx}
 \usepackage{pgfplots}
@@ -32,5 +32,6 @@ cat <<EOF > "$texfile"
 \end{document}
 EOF
 
-pdflatex -interaction=nonstopmode -output-directory="$tmp" "$texfile" > "$tmp"/tikz2pdf.log \
-    && mv "$tmpbase".pdf "${file%\.*}".pdf
+    pdflatex -interaction=nonstopmode -output-directory="$tmp" "$texfile" > "$tmp"/tikz2pdf.log \
+        && mv "$tmpbase".pdf "${file%\.*}".pdf
+done

@@ -18,6 +18,9 @@ Then run at the command line:
 
 #+BEGIN_SRC bash :export code :eval no
 tikz2pdf myfigure.tikz
+
+# Can also handle multiple files.
+tikz2pdf figures/*.tikz
 #+END_SRC
 
 replacing ~tikz2pdf~ with ~tikz2png~ or ~tikz2svg~ as needed.

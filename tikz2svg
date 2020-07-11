@@ -9,6 +9,7 @@ EOF
     exit 1
 fi
 
-tikz2pdf "$1"
-base="${1%\.*}"
-pdf2svg "$base".pdf "$base".svg
+for file in $*; do
+    base="${file%\.*}"
+    tikz2pdf "$file" && pdf2svg "$base".pdf "$base".svg
+done
