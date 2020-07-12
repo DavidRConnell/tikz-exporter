@@ -9,7 +9,14 @@ EOF
     exit 1
 fi
 
+verbose=false
+if [ "$1" == "-v" ]; then
+    verbose=true
+    shift
+fi
+
 for file in "$@"; do
     base="${file%\.*}"
+    $verbose && echo "Converting $file..."
     tikz2pdf "$file" && pdf2svg "$base".pdf "$base".svg
 done

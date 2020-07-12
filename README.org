@@ -21,6 +21,9 @@ tikz2pdf myfigure.tikz
 
 # Can also handle multiple files.
 tikz2pdf figures/*.tikz
+
+# To print the file names when they are being converted:
+tikz2pdf -v figures/*.tikz
 #+END_SRC
 
 replacing ~tikz2pdf~ with ~tikz2png~ or ~tikz2svg~ as needed.

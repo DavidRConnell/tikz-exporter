@@ -12,7 +12,14 @@ EOF
     exit 1
 fi
 
+verbose=false
+if [ "$1" == "-v" ]; then
+    verbose=true
+    shift
+fi
+
 for file in "$@"; do
+  $verbose && echo "Converting $file..."
   base="${file%\.*}"
   tikz2pdf "$file" \
     && pdftoppm -png -r $png_density -scale-to $png_size "$base".pdf "$base" \
